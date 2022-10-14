@@ -1,7 +1,14 @@
+using MyWiki.Web.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+string connectionString = builder.Configuration.GetConnectionString("MyWikiDbConnectionString");
+builder.Services.AddDbContext<MyWikiDbContext>(options => options.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 
