@@ -1,5 +1,6 @@
 using MyWiki.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using MyWiki.Web.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddRazorPages();
 string connectionString = builder.Configuration.GetConnectionString("MyWikiDbConnectionString");
 builder.Services.AddDbContext<MyWikiDbContext>(options => options.UseSqlServer(connectionString));
 
+// Inject implementation of IArticleRepository interface
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
 var app = builder.Build();
 

@@ -2,53 +2,50 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWiki.Web.Data;
 using MyWiki.Web.Models.Domain;
+using MyWiki.Web.Repositories;
 
 namespace MyWiki.Web.Pages.Articles
 {
     public class UpdateArticleModel : PageModel
     {
-        private readonly MyWikiDbContext myWikiDbContext;
+        private readonly IArticleRepository articleRepository;
 
         [BindProperty]
-        public Article Article { get; set; }
+        public Article article { get; set; }
 
-        public UpdateArticleModel(MyWikiDbContext myWikiDbContext)
+        public UpdateArticleModel(IArticleRepository articleRepository)
         {
-            this.myWikiDbContext = myWikiDbContext;
+            this.articleRepository = articleRepository;
         }
         public async Task OnGet(Guid id)
         {
-            Article = await myWikiDbContext.Articles.FindAsync(id);
+            article = await articleRepository.GetAsync(id);
         }
 
         public async Task<IActionResult> OnPostUpdate() 
         {
-            var chosenArticle = await myWikiDbContext.Articles.FindAsync(Article.Id);
-
-            if (chosenArticle != null) 
+            try
             {
-                chosenArticle.Title = Article.Title;
-                chosenArticle.FullDescription = Article.FullDescription;
-                chosenArticle.PublishedDate = Article.PublishedDate;
-                chosenArticle.Author = Article.Author;
-                chosenArticle.Visible = Article.Visible;
+                await articleRepository.UpdateAsync(article);
             }
-
-            await myWikiDbContext.SaveChangesAsync();
+            catch (Exception e)
+            {
+                ViewData["Error"] = e;
+                return Page();
+            }
             return RedirectToPage("/Articles/ListOfArticles");
         }
 
         public async Task<IActionResult> OnPostDelete()
         {
-            var chosenArticle = await myWikiDbContext.Articles.FindAsync(Article.Id);
-
-            if (chosenArticle != null)
+            if(await articleRepository.DeleteAsync(article.Id))
             {
-                myWikiDbContext.Articles.Remove(chosenArticle);
-                await myWikiDbContext.SaveChangesAsync();
                 return RedirectToPage("/Articles/ListOfArticles");
             }
-            return Page();
+            else 
+            {
+                return Page();
+            } 
         }
     }
 }

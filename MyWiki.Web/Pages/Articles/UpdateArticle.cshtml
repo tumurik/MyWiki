@@ -8,10 +8,11 @@
     </div>
 </div>
 
+<partial name="_Notification" />
 
-@if (Model.Article != null)
+@if (Model.article != null)
 {
-    <div class="container mt-5">
+    <div class="container mt-3">
         <form class="was-validated needs-validation border shadow border-radius-3" novalidate="" method="post">
             <div class="mt-5 mb-3 mx-5">
                 <select class="form-select" aria-label="articleType" required>
@@ -29,7 +30,7 @@
                    class="form-control"
                    id="articleId"
                    readonly
-                   asp-for="Article.Id">
+                   asp-for="article.Id">
             </div>
 
             <div class="mb-3 mx-5">
@@ -38,7 +39,7 @@
                    class="form-control"
                    id="articleTitle"
                    required
-                   asp-for="Article.Title">
+                   asp-for="article.Title">
             </div>
 
             <div class="mb-3 mx-5">
@@ -47,7 +48,7 @@
                       id="articleFullDescription"
                       rows="3"
                       required
-                      asp-for="Article.FullDescription">
+                      asp-for="article.FullDescription">
                     </textarea>
             </div>
 
@@ -57,7 +58,7 @@
                    class="form-control"
                    id="articlePublishedTime"
                    required
-                   asp-for="Article.PublishedDate" />
+                   asp-for="article.PublishedDate" />
             </div>
 
             <div class="mb-3 mx-5">
@@ -66,11 +67,11 @@
                    class="form-control"
                    id="articleAurhor"
                    required
-                   asp-for="Article.Author">
+                   asp-for="article.Author">
             </div>
 
             <div class="mb-3 mx-5 form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="articleVisible" checked asp-for="Article.Visible">
+                <input class="form-check-input" type="checkbox" id="articleVisible" checked asp-for="article.Visible">
                 <label class="form-check-label" for="articleVisible">Is article visible?</label>
             </div>
 

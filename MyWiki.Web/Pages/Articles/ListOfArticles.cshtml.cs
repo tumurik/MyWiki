@@ -3,23 +3,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWiki.Web.Data;
 using MyWiki.Web.Models.Domain;
 using Microsoft.EntityFrameworkCore;
-
+using MyWiki.Web.Repositories;
 
 namespace MyWiki.Web.Pages.Articles
 {
     public class ListOfArticlesModel : PageModel
     {
-        private readonly MyWikiDbContext myWikiDbContext;
+        private readonly IArticleRepository articleRepository;
 
-        public List<Article> Articles { get; set; }
+        public List<Article> articles { get; set; }
 
-        public ListOfArticlesModel(MyWikiDbContext myWikiDbContext)
+        public ListOfArticlesModel(IArticleRepository articleRepository)
         {
-            this.myWikiDbContext = myWikiDbContext;
+            this.articleRepository = articleRepository;
         }
         public async Task OnGet()
         {
-            Articles = await myWikiDbContext.Articles.ToListAsync();
+            articles = (await articleRepository.GetAllAsync())?.ToList();
         }
     }
 }
