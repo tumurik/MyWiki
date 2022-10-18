@@ -1,0 +1,91 @@
+﻿@page "{id:Guid}"
+@model MyWiki.Web.Pages.Articles.UpdateArticleModel
+@{
+}
+<div class="bg-secondary bg-opacity-10 py-3">
+    <div class="container">
+        <h1>Update Article</h1>
+    </div>
+</div>
+
+
+@if (Model.Article != null)
+{
+    <div class="container mt-5">
+        <form class="was-validated needs-validation border shadow border-radius-3" novalidate="" method="post">
+            <div class="mt-5 mb-3 mx-5">
+                <select class="form-select" aria-label="articleType" required>
+                    <!--asp-for="articleType"-->
+                    <option selected disabled value="">Please select your article type:</option>
+                    <option value="Support issue">Support issue</option>
+                    <option value="Technical issue">Technical issue</option>
+                    <option value="Article template">Article template</option>
+                </select>
+            </div>
+
+            <div class="mb-3 mx-5">
+                <label for="articleId" class="form-label">Id:</label>
+                <input type="text"
+                   class="form-control"
+                   id="articleId"
+                   readonly
+                   asp-for="Article.Id">
+            </div>
+
+            <div class="mb-3 mx-5">
+                <label for="articleTitle" class="form-label">Article title:</label>
+                <input type="text"
+                   class="form-control"
+                   id="articleTitle"
+                   required
+                   asp-for="Article.Title">
+            </div>
+
+            <div class="mb-3 mx-5">
+                <label for="articleFullDescription" class="form-label">Description:</label>
+                <textarea class="form-control"
+                      id="articleFullDescription"
+                      rows="3"
+                      required
+                      asp-for="Article.FullDescription">
+                    </textarea>
+            </div>
+
+            <div class="mb-3 mx-5">
+                <label for="articlePublishedTime" class="form-label">Published date:</label>
+                <input type="date"
+                   class="form-control"
+                   id="articlePublishedTime"
+                   required
+                   asp-for="Article.PublishedDate" />
+            </div>
+
+            <div class="mb-3 mx-5">
+                <label for="articleAuthor" class="form-label">Article author:</label>
+                <input type="text"
+                   class="form-control"
+                   id="articleAurhor"
+                   required
+                   asp-for="Article.Author">
+            </div>
+
+            <div class="mb-3 mx-5 form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="articleVisible" checked asp-for="Article.Visible">
+                <label class="form-check-label" for="articleVisible">Is article visible?</label>
+            </div>
+
+            <div class="mb-5 px-5 d-flex justify-content-between">
+                <button class="btn btn-primary" type="submit" asp-page-handler="Update">Update article</button>
+
+                <button class="btn btn-danger" type="submit" asp-page-handler="Delete">Delete article</button>
+            </div>
+
+        </form>
+    </div>
+}
+else
+{
+    <div class="container">
+        <p>Article Not Found!</p>
+    </div>
+}

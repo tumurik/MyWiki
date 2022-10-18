@@ -5,53 +5,52 @@
 <div class="bg-secondary bg-opacity-10 py-3">
     <div class="container">
         <h1>Create Article</h1>
-
-        <form class="was-validated needs-validation" novalidate="" method="post">
-
-            <div class="mt-5 mb-3">
-                <select class="form-select" aria-label="articleType" required="" <!--asp-for="articleType"-->/>
-                    <option selected disabled value="">Please select your article type:</option>
-                    <option value="Support issue">Support issue</option>
-                    <option value="Technical issue">Technical issue</option>
-                    <option value="Article template">Article template</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="articleTitle" class="form-label">Article title:</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="articleTitle" 
-                    required=""
-                    asp-for="CreateArticleRequest.Title">
-            </div>
-
-            <div class="mb-3">
-                <label for="articleFullDescription" class="form-label">Description:</label>
-                <textarea 
-                    class="form-control" 
-                    id="articleFullDescription" 
-                    rows="3" 
-                    required=""
-                    asp-for="CreateArticleRequest.FullDescription">
-                </textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="articlePublishedTime" class="form-label">Published date:</label>
-                <input 
-                    type="date" 
-                    class="form-control" 
-                    id="articlePublishedTime" 
-                    required=""
-                    asp-for="CreateArticleRequest.PublishedDate"/>
-            </div>
-            
-            <div class="mb-3">
-                <button class="btn btn-primary" type="submit">Submit article</button>
-            </div>
-
-        </form>
     </div>
+</div>
+
+<div class="container mt-5">
+    <form class="was-validated needs-validation border shadow border-radius-3" novalidate="" method="post">
+        <div class="mt-5 mb-3 mx-5">
+            <select class="form-select" aria-label="articleType" required>
+                <!--asp-for="articleType"-->
+                <option selected disabled value="">Please select your article type:</option>
+                <option value="Support issue">Support issue</option>
+                <option value="Technical issue">Technical issue</option>
+                <option value="Article template">Article template</option>
+            </select>
+        </div>
+
+        <div class="mb-3 mx-5">
+            <label for="articleTitle" class="form-label">Article title:</label>
+            <input type="text"
+                   class="form-control"
+                   id="articleTitle"
+                   required
+                   asp-for="CreateArticleRequest.Title">
+        </div>
+
+        <div class="mb-3 mx-5">
+            <label for="articleFullDescription" class="form-label">Description:</label>
+            <textarea class="form-control"
+                      id="articleFullDescription"
+                      rows="3"
+                      required
+                      asp-for="CreateArticleRequest.FullDescription">
+                </textarea>
+        </div>
+
+        <div class="mb-3 mx-5">
+            <label for="articlePublishedTime" class="form-label">Published date:</label>
+            <input type="date"
+                   class="form-control"
+                   id="articlePublishedTime"
+                   required
+                   asp-for="CreateArticleRequest.PublishedDate" />
+        </div>
+
+        <div class="mb-5 text-center">
+            <button class="btn btn-primary" type="submit">Submit article</button>
+        </div>
+
+    </form>
 </div>

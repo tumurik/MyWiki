@@ -22,7 +22,7 @@ namespace MyWiki.Web.Pages.Articles
         {
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPost()
         {
             var Article = new Article()
             {
@@ -32,9 +32,20 @@ namespace MyWiki.Web.Pages.Articles
                 Author = "Default",
                 Visible = true
             };
+            /*
+             * change issue type model
+             * 
+            var IssueType = new IssueType()
+            {
+                Type =  CreateIssueTypeRequest.ArticleType
+            };
 
-            myWikiDbContext.Articles.Add(Article);
-            myWikiDbContext.SaveChanges();
+            myWikiDbContext.IssueTypes.Add(IssueType);  
+            */
+            await myWikiDbContext.Articles.AddAsync(Article);
+            await myWikiDbContext.SaveChangesAsync();
+
+            return RedirectToPage("/Index");
         }
     }
 }

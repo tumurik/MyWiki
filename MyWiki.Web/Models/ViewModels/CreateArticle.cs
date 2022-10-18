@@ -5,5 +5,7 @@
         public string Title { get; set; }
         public string FullDescription { get; set; }
         public DateTime PublishedDate { get; set; }
+        public string Author { get; set; }
+        public bool Visible { get; set; }
     }
 }
