@@ -30,6 +30,7 @@ namespace MyWiki.Web.Pages.Articles
                 var article = new Article()
                 {
                     Title = CreateArticleRequest.Title,
+                    UrlHandle = ( CreateArticleRequest.Title?.ToLower().Replace(" ","-") ),
                     FullDescription = CreateArticleRequest.FullDescription,
                     PublishedDate = CreateArticleRequest.PublishedDate,
                     Author = "Default",

@@ -18,11 +18,16 @@ namespace MyWiki.Web.Repositories
             await myWikiDbContext.SaveChangesAsync();
 
             return article;
-        }
+        }      
 
         public async Task<IEnumerable<Article>> GetAllAsync()
         {
             return await myWikiDbContext.Articles.ToListAsync();
+        }
+
+        public async Task<Article> GetAsync(string urlHandle)
+        {
+            return await myWikiDbContext.Articles.FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
         }
 
         public async Task<Article> GetAsync(Guid id)
@@ -37,6 +42,7 @@ namespace MyWiki.Web.Repositories
             if (chosenArticle != null)
             {
                 chosenArticle.Title = article.Title;
+                chosenArticle.UrlHandle = chosenArticle.Title?.ToLower().Replace(" ", "-");
                 chosenArticle.FullDescription = article.FullDescription;
                 chosenArticle.PublishedDate = article.PublishedDate;
                 chosenArticle.Author = article.Author;
@@ -59,5 +65,6 @@ namespace MyWiki.Web.Repositories
             }
             return false;
         }
+
     }
 }

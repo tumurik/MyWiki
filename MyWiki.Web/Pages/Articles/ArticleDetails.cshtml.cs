@@ -1,12 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MyWiki.Web.Models.Domain;
+using MyWiki.Web.Repositories;
 
 namespace MyWiki.Web.Pages.Articles
 {
     public class ArticleDetailsModel : PageModel
     {
-        public void OnGet(string Title)
+        private readonly IArticleRepository articleRepository;
+
+        public Article article { get; set; }
+
+        public ArticleDetailsModel(IArticleRepository articleRepository)
         {
+            this.articleRepository = articleRepository;
+        }
+        public async Task<IActionResult> OnGet(string Title)
+        {
+            article = await articleRepository.GetAsync(Title);
+            return Page();
         }
     }
 }

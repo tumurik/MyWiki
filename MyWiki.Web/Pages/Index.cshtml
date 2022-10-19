@@ -42,7 +42,7 @@
                                 </dt>
                                 <dd class="col-sm-9">
                                     <p>
-                                        @article.FullDescription.Substring(0, 250)...
+                                        @((@article.FullDescription.Length > 250)? (@article.FullDescription.Substring(0, 250) + "...") : (@article.FullDescription))
                                     </p>
                                 </dd>
                                 <dt class="col-sm-3">
@@ -62,7 +62,7 @@
                                     </p>
                                 </dd>
                             </dl>
-                            <a href="#" class="btn btn-dark">Read article</a>
+                            <a href="/article/@(article.UrlHandle)" class="btn btn-dark">Read article</a>
                         </div>
                     </div>                 
                 }

@@ -3,4 +3,21 @@
 @{
 }
 
-<h1>Article Details mfka</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            @if (Model.article != null) 
+            {
+                <h1 class="mb-3">@Model.article.Title</h1>
+                <div class="d-flex justify-content-between">
+                    <span class="text-secondary">@Model.article.PublishedDate.ToShortDateString()</span>
+                    <span class="text-secondary">@Model.article.Author</span>
+                </div>
+            }
+            else
+            {
+                <h2>Article doesn't exist!</h2>
+            }
+        </div>
+    </div>
+</div>
