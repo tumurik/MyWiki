@@ -15,9 +15,9 @@ namespace MyWiki.Web.Pages.Articles
         {
             this.articleRepository = articleRepository;
         }
-        public async Task<IActionResult> OnGet(string Title)
+        public async Task<IActionResult> OnGet(string urlHandle)
         {
-            article = await articleRepository.GetAsync(Title);
+            article = await articleRepository.GetAsync(urlHandle);
             return Page();
         }
     }

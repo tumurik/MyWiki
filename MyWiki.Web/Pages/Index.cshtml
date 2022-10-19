@@ -42,7 +42,10 @@
                                 </dt>
                                 <dd class="col-sm-9">
                                     <p>
-                                        @((@article.FullDescription.Length > 250)? (@article.FullDescription.Substring(0, 250) + "...") : (@article.FullDescription))
+                                        <!-- If description is larger than 250 symbols this part make it shorter-->
+                                        @((@article.FullDescription.Length > 250)?
+                                        (@article.FullDescription.Substring(0, 250) + "...") :
+                                        (@article.FullDescription))
                                     </p>
                                 </dd>
                                 <dt class="col-sm-3">

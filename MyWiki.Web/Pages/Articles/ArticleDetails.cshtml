@@ -1,6 +1,7 @@
-﻿@page "/article/{title}"
+﻿@page "/article/{urlHandle}"
 @model MyWiki.Web.Pages.Articles.ArticleDetailsModel
 @{
+    //@Html.Raw(Html.Encode(Model.article.FullDescription).Replace("\n", "<br />"))
 }
 
 <div class="container my-5">
@@ -9,9 +10,12 @@
             @if (Model.article != null) 
             {
                 <h1 class="mb-3">@Model.article.Title</h1>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">@Model.article.PublishedDate.ToShortDateString()</span>
                     <span class="text-secondary">@Model.article.Author</span>
+                </div>
+                <div class="mb-3">
+                    @Html.Raw(Model.article.FullDescription.Replace("\n","<br />"))
                 </div>
             }
             else
