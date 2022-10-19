@@ -14,16 +14,11 @@
 {
     <div class="container mt-3">
         <form class="was-validated needs-validation border shadow border-radius-3" novalidate="" method="post">
+            
             <div class="mt-5 mb-3 mx-5">
-                <select class="form-select" aria-label="articleType" required>
-                    <!--asp-for="articleType"-->
-                    <option selected disabled value="">Please select your article type:</option>
-                    <option value="Support issue">Support issue</option>
-                    <option value="Technical issue">Technical issue</option>
-                    <option value="Article template">Article template</option>
-                </select>
+                <select class="form-select" aria-label="articleType" asp-for="articleType" asp-items="Model.articleTypeDropdownList"></select>
             </div>
-
+            
             <div class="mb-3 mx-5">
                 <label for="articleId" class="form-label">Id:</label>
                 <input type="text"

@@ -1,7 +1,7 @@
 ﻿@page "/article/{urlHandle}"
 @model MyWiki.Web.Pages.Articles.ArticleDetailsModel
 @{
-    //@Html.Raw(Html.Encode(Model.article.FullDescription).Replace("\n", "<br />"))
+    ViewData["Title"] = Model.article.Title;
 }
 
 <div class="container my-5">

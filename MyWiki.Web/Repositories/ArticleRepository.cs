@@ -22,17 +22,20 @@ namespace MyWiki.Web.Repositories
 
         public async Task<IEnumerable<Article>> GetAllAsync()
         {
-            return await myWikiDbContext.Articles.ToListAsync();
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                        .ToListAsync();
         }
 
         public async Task<Article> GetAsync(string urlHandle)
         {
-            return await myWikiDbContext.Articles.FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                        .FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
         }
 
         public async Task<Article> GetAsync(Guid id)
         {
-            return await myWikiDbContext.Articles.FindAsync(id);
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                        .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Article> UpdateAsync(Article article)
@@ -42,11 +45,20 @@ namespace MyWiki.Web.Repositories
             if (chosenArticle != null)
             {
                 chosenArticle.Title = article.Title;
-                chosenArticle.UrlHandle = chosenArticle.Title?.ToLower().Replace(" ", "-");
+                chosenArticle.UrlHandle = article.Title?.ToLower().Replace(" ", "-");
                 chosenArticle.FullDescription = article.FullDescription;
                 chosenArticle.PublishedDate = article.PublishedDate;
                 chosenArticle.Author = article.Author;
                 chosenArticle.Visible = article.Visible;
+
+                if (article.IssueTypes != null && article.IssueTypes.Any()) 
+                {
+                    //Delete chosenArticle issue type
+                    myWikiDbContext.IssueTypes.RemoveRange(chosenArticle.IssueTypes);
+                    //Change chosenArticle issue type
+                    article.IssueTypes.ToList().ForEach(x => x.ArticleId = chosenArticle.Id);
+                    await myWikiDbContext.IssueTypes.AddRangeAsync(article.IssueTypes);
+                }
             }
 
             await myWikiDbContext.SaveChangesAsync();

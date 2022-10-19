@@ -4,6 +4,7 @@ using MyWiki.Web.Data;
 using MyWiki.Web.Models.Domain;
 using MyWiki.Web.Models.ViewModels;
 using MyWiki.Web.Repositories;
+using System;
 
 namespace MyWiki.Web.Pages.Articles
 {
@@ -13,6 +14,8 @@ namespace MyWiki.Web.Pages.Articles
 
         [BindProperty]
         public CreateArticle CreateArticleRequest { get; set; }
+        [BindProperty]
+        public string articleType { get; set; }
 
         public CreateArticleModel(IArticleRepository articleRepository)
         {
@@ -30,22 +33,13 @@ namespace MyWiki.Web.Pages.Articles
                 var article = new Article()
                 {
                     Title = CreateArticleRequest.Title,
-                    UrlHandle = ( CreateArticleRequest.Title?.ToLower().Replace(" ","-") ),
+                    UrlHandle = (CreateArticleRequest.Title?.ToLower().Replace(" ", "-")),
                     FullDescription = CreateArticleRequest.FullDescription,
                     PublishedDate = CreateArticleRequest.PublishedDate,
                     Author = "Default",
-                    Visible = true
-                };
-                /*
-                 * change issue type model
-                 * 
-                var IssueType = new IssueType()
-                {
-                    Type =  CreateIssueTypeRequest.ArticleType
-                };
-
-                myWikiDbContext.IssueTypes.Add(IssueType);  
-                */
+                    Visible = true,
+                    IssueTypes = new List<IssueType> { new IssueType { Type = articleType } }                    
+            };
                 await articleRepository.CreateAsync(article);
             }
             catch (Exception e)

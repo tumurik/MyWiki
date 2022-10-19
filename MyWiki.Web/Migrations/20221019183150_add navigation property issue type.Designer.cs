@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWiki.Web.Data;
 
@@ -11,9 +12,10 @@ using MyWiki.Web.Data;
 namespace MyWiki.Web.Migrations
 {
     [DbContext(typeof(MyWikiDbContext))]
-    partial class MyWikiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221019183150_add navigation property issue type")]
+    partial class addnavigationpropertyissuetype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

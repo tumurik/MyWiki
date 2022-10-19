@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWiki.Web.Data;
 
@@ -11,9 +12,10 @@ using MyWiki.Web.Data;
 namespace MyWiki.Web.Migrations
 {
     [DbContext(typeof(MyWikiDbContext))]
-    partial class MyWikiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221019030644_ThirdEdition added issue types")]
+    partial class ThirdEditionaddedissuetypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,7 +72,8 @@ namespace MyWiki.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleId");
+                    b.HasIndex("ArticleId")
+                        .IsUnique();
 
                     b.ToTable("IssueTypes");
                 });
@@ -78,15 +81,16 @@ namespace MyWiki.Web.Migrations
             modelBuilder.Entity("MyWiki.Web.Models.Domain.IssueType", b =>
                 {
                     b.HasOne("MyWiki.Web.Models.Domain.Article", null)
-                        .WithMany("IssueTypes")
-                        .HasForeignKey("ArticleId")
+                        .WithOne("IssueType")
+                        .HasForeignKey("MyWiki.Web.Models.Domain.IssueType", "ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("MyWiki.Web.Models.Domain.Article", b =>
                 {
-                    b.Navigation("IssueTypes");
+                    b.Navigation("IssueType")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
