@@ -1,11 +1,77 @@
 ﻿@page
+@using System.Text.RegularExpressions
+@using System.Text
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <i class="fas fa-search"></i>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row bg-dark text-secondary align-items-center g-5 py-5">
+        
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold text-white lh-1 mb-3">
+                MyWiki - development wiki database
+            </h1>
+            <p class="fs-4 fw-normal">
+                In MyWiki you can create common, support or technical issue resolving articles.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
+
+            <h2 class="mb-5 display-3">Articles</h2>
+
+            @if (Model.articles != null && Model.articles.Any())
+            {
+
+                foreach (var article in Model.articles)
+                {
+                    <div class="mb-3 bg-light box-shadow">
+                        <div class="p-4">
+                            <h2 class="mb-2">
+                                @article.Title
+                            </h2>
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Description:
+                                </dt>
+                                <dd class="col-sm-9">
+                                    <p>
+                                        @article.FullDescription.Substring(0, 250)...
+                                    </p>
+                                </dd>
+                                <dt class="col-sm-3">
+                                    Author:
+                                </dt>
+                                <dd class="col-sm-9">
+                                    <p>
+                                        @article.Author
+                                    </p>
+                                </dd>
+                                <dt class="col-sm-3">
+                                    Published date:
+                                </dt>
+                                <dd class="col-sm-9">
+                                    <p>
+                                        @article.PublishedDate.ToShortDateString()
+                                    </p>
+                                </dd>
+                            </dl>
+                            <a href="#" class="btn btn-dark">Read article</a>
+                        </div>
+                    </div>                 
+                }
+            }
+            else
+            {
+            <h1>HMMMMMMM</h1>
+            }
+            
+        </div>
+    </div>
 </div>
