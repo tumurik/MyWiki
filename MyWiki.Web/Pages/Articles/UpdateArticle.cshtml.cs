@@ -60,9 +60,7 @@ namespace MyWiki.Web.Pages.Articles
             {
                 try
                 {
-                    //article.IssueTypes.Type = articleType;
                     article.IssueTypes = new List<IssueType> { new IssueType { Type = articleType } };
-                    //article.issueTypes = new List<IssueType> { new IssueType { Type = articleType } }
 
                     await articleRepository.UpdateAsync(article);
                 }

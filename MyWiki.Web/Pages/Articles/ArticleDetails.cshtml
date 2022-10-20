@@ -6,15 +6,25 @@
 
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-8">
             @if (Model.article != null) 
             {
                 <h1 class="mb-3">@Model.article.Title</h1>
+
+                <div class="mb-3">
+                    <!-- can be displayed for more than one tag, but need diffrent element for that-->
+                    @foreach (var type in Model.article.IssueTypes) 
+                    {
+                        <h3 class="mx-3">@type.Type</h3>
+                    }
+                </div>
+
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">@Model.article.PublishedDate.ToShortDateString()</span>
                     <span class="text-secondary">@Model.article.Author</span>
                 </div>
-                <div class="mb-3">
+
+                <div class="mb-3 p-3 bg-light shadow-sm">
                     @Html.Raw(Model.article.FullDescription.Replace("\n","<br />"))
                 </div>
             }

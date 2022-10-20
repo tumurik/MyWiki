@@ -1,4 +1,5 @@
-﻿using MyWiki.Web.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWiki.Web.Data;
 using MyWiki.Web.Models.Domain;
 
 namespace MyWiki.Web.Repositories
@@ -13,7 +14,9 @@ namespace MyWiki.Web.Repositories
         }
         public async Task<IEnumerable<IssueType>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var issueTypes = await myWikiDbContext.IssueTypes.ToListAsync();
+
+            return issueTypes.DistinctBy(x => x.Type);
         }
     }
 }

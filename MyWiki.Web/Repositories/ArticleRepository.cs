@@ -23,19 +23,26 @@ namespace MyWiki.Web.Repositories
         public async Task<IEnumerable<Article>> GetAllAsync()
         {
             return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
-                        .ToListAsync();
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Article>> GetAllAsync(string type)
+        {
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                .Where(x => x.IssueTypes.Any(x => x.Type == type))       
+                .ToListAsync();
         }
 
         public async Task<Article> GetAsync(string urlHandle)
         {
             return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
-                        .FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
+                .FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
         }
 
         public async Task<Article> GetAsync(Guid id)
         {
             return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
-                        .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Article> UpdateAsync(Article article)

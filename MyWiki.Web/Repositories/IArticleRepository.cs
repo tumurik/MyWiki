@@ -5,6 +5,7 @@ namespace MyWiki.Web.Repositories
     public interface IArticleRepository
     {
         Task<IEnumerable<Article>> GetAllAsync();
+        Task<IEnumerable<Article>> GetAllAsync(string type);
         Task<Article> GetAsync(Guid id);
         Task<Article> GetAsync(string Title);
         Task<Article> CreateAsync(Article article);
