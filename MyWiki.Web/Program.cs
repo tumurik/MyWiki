@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 
 string connectionString = builder.Configuration.GetConnectionString("MyWikiDbConnectionString");
 builder.Services.AddDbContext<MyWikiDbContext>(options => options.UseSqlServer(connectionString));
+//add authdbcontext
 
 // Inject implementation of repository interfaces
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();

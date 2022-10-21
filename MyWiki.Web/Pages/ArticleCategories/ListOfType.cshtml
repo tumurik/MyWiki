@@ -9,8 +9,27 @@
 
             @foreach (var type in Model.articles.First().IssueTypes)
             {
-                <h2 class="mb-3 display-3">@(type.Type + "s")</h2>
+                <h2 class="mb-5 display-3">@(type.Type + "s")</h2>
             }
+
+            <div class="mb-3">
+                <form class="mx-2 px-4 input-group">
+
+                    <input type="search"
+                           class="form-control rounded"
+                           placeholder="Search"
+                           aria-label="Search"
+                           aria-describedby="search-addon"
+                           asp-for="searchString" />
+
+                    <button type="submit"
+                            class="input-group-text btn btn-primary"
+                            id="search-addon">
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                </form>
+            </div>
 
             @if (Model.articles != null && Model.articles.Any())
             {

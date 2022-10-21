@@ -10,6 +10,8 @@ namespace MyWiki.Web.Pages.ArticleCategories
         private readonly IArticleRepository articleRepository;
 
         public List<Article> articles { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string searchString { get; set; }
 
         public ListOfTypeModel(IArticleRepository articleRepository)
         {
@@ -17,7 +19,19 @@ namespace MyWiki.Web.Pages.ArticleCategories
         }
         public async Task<IActionResult> OnGet(string type)
         {
-            articles = (await articleRepository.GetAllAsync(type)).ToList();
+            // To fix - sometimes show wrong category article(only support issue)
+            // In database everything ok, so problem in code
+            string articlesType = type;
+
+            if (searchString != null && searchString.Any())
+            {
+                articles = (await articleRepository.GetAllByCategorySearchAsync(articlesType, searchString)).ToList();
+            }
+            else
+            {
+                articles = (await articleRepository.GetAllAsync(articlesType)).ToList();
+            }
+
             return Page();
         }
     }

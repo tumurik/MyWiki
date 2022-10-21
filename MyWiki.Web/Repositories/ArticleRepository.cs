@@ -33,6 +33,29 @@ namespace MyWiki.Web.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Article>> GetAllByCategorySearchAsync(string type, string searchString)
+        {
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                .Where(x => x.Title.Contains(searchString) || x.FullDescription.Contains(searchString))
+                .Where(x => x.IssueTypes.Any(x => x.Type == type))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Article>> GetAllSearchAsync(string searchString)
+        {
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                .Where(x => x.Title.Contains(searchString) || x.FullDescription.Contains(searchString))
+                .ToListAsync();
+        }
+
+        // GetAllDateFilterAsync Dont work correctly
+        public async Task<IEnumerable<Article>> GetAllDateFilterAsync(string filterDate)
+        {
+            return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))
+                .Where(x => x.PublishedDate.ToShortDateString() == filterDate)
+                .ToListAsync();
+        }
+        
         public async Task<Article> GetAsync(string urlHandle)
         {
             return await myWikiDbContext.Articles.Include(nameof(Article.IssueTypes))

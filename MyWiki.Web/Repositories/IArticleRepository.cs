@@ -6,6 +6,9 @@ namespace MyWiki.Web.Repositories
     {
         Task<IEnumerable<Article>> GetAllAsync();
         Task<IEnumerable<Article>> GetAllAsync(string type);
+        Task<IEnumerable<Article>> GetAllByCategorySearchAsync(string type, string searchString);
+        Task<IEnumerable<Article>> GetAllSearchAsync(string searchString);
+        Task<IEnumerable<Article>> GetAllDateFilterAsync(string filterDate);
         Task<Article> GetAsync(Guid id);
         Task<Article> GetAsync(string Title);
         Task<Article> CreateAsync(Article article);
