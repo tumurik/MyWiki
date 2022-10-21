@@ -63,13 +63,14 @@ namespace MyWiki.Web.Pages.Articles
                     article.IssueTypes = new List<IssueType> { new IssueType { Type = articleType } };
 
                     await articleRepository.UpdateAsync(article);
+                    return RedirectToPage("/Articles/ListOfArticles");
                 }
                 catch (Exception e)
                 {
                     ViewData["Error"] = e;
                     return Page();
                 }
-                return RedirectToPage("/Articles/ListOfArticles");
+                
             }
 
         public async Task<IActionResult> OnPostDelete()

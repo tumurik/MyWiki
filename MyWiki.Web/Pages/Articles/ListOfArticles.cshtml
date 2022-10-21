@@ -12,7 +12,9 @@
 @if (Model.articles != null && Model.articles.Any()) 
 {
     <div class="container mt-5">
+
         <table class="table table-striped">
+
             <thead>
                 <tr>
                     <td>
@@ -25,6 +27,7 @@
                     </td>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var article in Model.articles)
                 {
@@ -41,7 +44,9 @@
                     </tr>
                 }
             </tbody>
+
         </table>
+
     </div>
 }
 else

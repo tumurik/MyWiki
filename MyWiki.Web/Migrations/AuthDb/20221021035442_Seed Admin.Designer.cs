@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWiki.Web.Data;
 
@@ -11,9 +12,10 @@ using MyWiki.Web.Data;
 namespace MyWiki.Web.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221021035442_Seed Admin")]
+    partial class SeedAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,16 +259,14 @@ namespace MyWiki.Web.Migrations.AuthDb
                         {
                             Id = "5f7a2055-3dc9-435e-8b22-b5ad16f97815",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d544360-9584-4e4a-a04c-c8db640bc7e3",
+                            ConcurrencyStamp = "371fe2d1-3dd0-48c0-933a-f94c456443cf",
                             Department = "Administration",
                             Email = "admin@mywiki.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@MYWIKI.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECPJW+GXdjboD8Vs5NlXpAooOes6J0h2HGsRyxI6ylThXhou06OWjc4H8xpxmhdFSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC9DNAsv0BSPi2D7KSDz2fSui5Y/xAphTZnTQs9ypN0g8epRKm5LWlYngLfZmSkL8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "370eb7d1-304f-4a78-b78e-b0ef87ded501",
+                            SecurityStamp = "2bb2d972-78a2-468f-a77e-aa33ebe725fa",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

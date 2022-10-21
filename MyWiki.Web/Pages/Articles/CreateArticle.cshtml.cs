@@ -42,14 +42,14 @@ namespace MyWiki.Web.Pages.Articles
                 };
 
                 await articleRepository.CreateAsync(article);
+                return RedirectToPage("/Index");
             }
             catch (Exception e)
             {
                 ViewData["Error"] = e;
                 return Page();
             }
-
-            return RedirectToPage("/Index");
+            
         }
     }
 }

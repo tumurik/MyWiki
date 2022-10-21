@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWiki.Web.Data;
 
@@ -11,9 +12,10 @@ using MyWiki.Web.Data;
 namespace MyWiki.Web.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221021034003_Customize identity user")]
+    partial class Customizeidentityuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,12 +156,12 @@ namespace MyWiki.Web.Migrations.AuthDb
                     b.HasData(
                         new
                         {
-                            UserId = "5f7a2055-3dc9-435e-8b22-b5ad16f97815",
+                            UserId = "3de52b61-1c3c-43fe-8514-a6e9be46ed05",
                             RoleId = "469680c0-fc6e-4099-b20e-04ad3dd67d11"
                         },
                         new
                         {
-                            UserId = "5f7a2055-3dc9-435e-8b22-b5ad16f97815",
+                            UserId = "3de52b61-1c3c-43fe-8514-a6e9be46ed05",
                             RoleId = "e7ec7f78-bcc9-40d5-a62e-df71d1695367"
                         });
                 });
@@ -255,20 +257,18 @@ namespace MyWiki.Web.Migrations.AuthDb
                     b.HasData(
                         new
                         {
-                            Id = "5f7a2055-3dc9-435e-8b22-b5ad16f97815",
+                            Id = "3de52b61-1c3c-43fe-8514-a6e9be46ed05",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d544360-9584-4e4a-a04c-c8db640bc7e3",
+                            ConcurrencyStamp = "1d381d71-8e7d-44bc-b6c1-dc02a83bb0b1",
                             Department = "Administration",
                             Email = "admin@mywiki.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@MYWIKI.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECPJW+GXdjboD8Vs5NlXpAooOes6J0h2HGsRyxI6ylThXhou06OWjc4H8xpxmhdFSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPTJayhS8B5GU8SYMVwuEzlbrB5w+WAqL57JTd5CmWS6KG7RFJnK45H0ZRMeJ/Z5HQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "370eb7d1-304f-4a78-b78e-b0ef87ded501",
+                            SecurityStamp = "0974b07e-9510-4af1-ad74-e33243162686",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "admin@mywiki.com"
                         });
                 });
 

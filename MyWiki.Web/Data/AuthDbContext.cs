@@ -7,7 +7,7 @@ namespace MyWiki.Web.Data
 {
     public class AuthDbContext : IdentityDbContext<MyWikiUser>
     {
-        public AuthDbContext(DbContextOptions options) : base(options)
+        public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
         }
 
@@ -39,24 +39,25 @@ namespace MyWiki.Web.Data
 
             builder.Entity<IdentityRole>().HasData(roles);
 
-            // Seed Admin
-            var adminId = "3de52b61-1c3c-43fe-8514-a6e9be46ed05";
-            var adminUser = new MyWikiUser()
-            {
-                Id = adminId,
-                UserName = "admin@mywiki.com",
-                Email = "admin@mywiki.com",
-                Department = "Administration"
-
-            };
-            adminUser.PasswordHash = new PasswordHasher<MyWikiUser>()
-                .HashPassword(adminUser, "admin");
-            builder.Entity<MyWikiUser>().HasData(adminUser);
-
             builder.Entity<MyWikiUser>()
                 .Property(e => e.Department)
             .HasMaxLength(50);
 
+            // Seed Admin
+            var adminId = "5f7a2055-3dc9-435e-8b22-b5ad16f97815";
+            var adminUser = new MyWikiUser()
+            {
+                Id = adminId,
+                UserName = "admin",
+                Email = "admin@mywiki.com",
+                Department = "Administration",
+                NormalizedUserName = "admin".ToUpper(),
+                NormalizedEmail = "admin@mywiki.com".ToUpper()
+
+            };
+            adminUser.PasswordHash = new PasswordHasher<MyWikiUser>()
+                .HashPassword(adminUser, "admin123");
+            builder.Entity<MyWikiUser>().HasData(adminUser);
 
 
             // Give Admin both roles - Admin, User

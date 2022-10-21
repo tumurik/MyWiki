@@ -16,6 +16,19 @@ builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(myW
 
 builder.Services.AddIdentity<MyWikiUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
 
+//builder.Services.;
+//services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    //Password requirements
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 3;
+    options.Password.RequiredUniqueChars = 1;
+});
+
 // Inject implementation of repository interfaces
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IIssueTypeRepository, IssueTypeRepository>();
