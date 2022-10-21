@@ -5,7 +5,7 @@ namespace MyWiki.Web.Data
 {
     public class MyWikiDbContext : DbContext
     {
-        public MyWikiDbContext(DbContextOptions options) : base(options)
+        public MyWikiDbContext(DbContextOptions<MyWikiDbContext> options) : base(options)
         {
         }
 

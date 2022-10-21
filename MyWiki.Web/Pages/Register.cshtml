@@ -1,0 +1,61 @@
+﻿@page
+@model MyWiki.Web.Pages.RegisterModel
+@{
+}
+
+<div class="container mt-5 mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <h1 class="mb-3 h3">Registration</h1>
+
+            <partial name="_Notification" />
+
+            <form class="was-validated needs-validation border shadow border-radius-3" novalidate="" method="post">
+              
+                <div class="mb-3 mx-5">
+                    <label class="form-label">Username:</label>
+                    <input type="text"
+                           class="form-control"
+                           required 
+                           asp-for="RegisterViewModel.Username" />
+                </div>
+
+                <div class="mb-3 mx-5">
+                    <label class="form-label">Email:</label>
+                    <input type="email"
+                           class="form-control"
+                           required
+                           asp-for="RegisterViewModel.Email" />
+                </div>
+
+                <div class="mb-3 mx-5">
+                    <label class="form-label">Password:</label>
+                    <input type="password"
+                           class="form-control"
+                           required
+                           asp-for="RegisterViewModel.Password" />
+                </div>
+
+                <div class="my-3 mx-5">
+                    <select 
+                        class="form-select" 
+                        aria-label="department" 
+                        required 
+                        asp-for="RegisterViewModel.Department" >
+
+                        <option selected disabled value="">Please select your department:</option>
+                        <option value="Support department">Support department</option>
+                        <option value="Technical department">Technical department</option>
+
+                    </select>
+                </div>
+
+                <div class="mb-5 text-center">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

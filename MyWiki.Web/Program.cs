@@ -1,15 +1,20 @@
 using MyWiki.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using MyWiki.Web.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-string connectionString = builder.Configuration.GetConnectionString("MyWikiDbConnectionString");
-builder.Services.AddDbContext<MyWikiDbContext>(options => options.UseSqlServer(connectionString));
-//add authdbcontext
+string myWikiConnectionString = builder.Configuration.GetConnectionString("MyWikiDbConnectionString");
+string myWikiAuthConnectionString = builder.Configuration.GetConnectionString("MyWikiAuthDbConnectionString");
+
+builder.Services.AddDbContext<MyWikiDbContext>(options => options.UseSqlServer(myWikiConnectionString));
+builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(myWikiAuthConnectionString));
+
+builder.Services.AddIdentity<MyWikiUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
 
 // Inject implementation of repository interfaces
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
@@ -30,6 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

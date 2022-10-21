@@ -39,7 +39,8 @@ namespace MyWiki.Web.Pages.Articles
                     Author = "Default",
                     Visible = true,
                     IssueTypes = new List<IssueType> { new IssueType { Type = articleType } }                    
-            };
+                };
+
                 await articleRepository.CreateAsync(article);
             }
             catch (Exception e)
