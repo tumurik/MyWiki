@@ -4,9 +4,11 @@ using MyWiki.Web.Data;
 using MyWiki.Web.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using MyWiki.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyWiki.Web.Pages.Articles
 {
+    [Authorize]
     public class ListOfArticlesModel : PageModel
     {
         private readonly IArticleRepository articleRepository;

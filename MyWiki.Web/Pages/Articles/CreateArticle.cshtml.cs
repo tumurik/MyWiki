@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWiki.Web.Data;
@@ -8,9 +10,12 @@ using System;
 
 namespace MyWiki.Web.Pages.Articles
 {
+    [Authorize]
     public class CreateArticleModel : PageModel
     {
         private readonly IArticleRepository articleRepository;
+
+        //private readonly UserManager<MyWikiUser> userManager;
 
         [BindProperty]
         public CreateArticle CreateArticleRequest { get; set; }
@@ -30,6 +35,7 @@ namespace MyWiki.Web.Pages.Articles
         {
             try
             {
+                //var user = await userManager.FindByNameAsync("");
                 var article = new Article()
                 {
                     Title = CreateArticleRequest.Title,

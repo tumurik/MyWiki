@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWiki.Web.Models.Domain;
@@ -5,6 +6,7 @@ using MyWiki.Web.Repositories;
 
 namespace MyWiki.Web.Pages.Articles
 {
+    [Authorize]
     public class ArticleDetailsModel : PageModel
     {
         private readonly IArticleRepository articleRepository;

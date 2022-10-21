@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using MyWiki.Web.Repositories;
 
 namespace MyWiki.Web.Pages.Articles
 {
+    [Authorize]
     public class UpdateArticleModel : PageModel
     {
         private readonly IArticleRepository articleRepository;
